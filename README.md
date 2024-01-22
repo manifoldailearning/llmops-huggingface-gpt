@@ -1,8 +1,28 @@
-# About the Repo
+# Commands
 
-This is a course on LLMOps by Expert Insturctor - Nachiketh Murthy
-(https://www.linkedin.com/in/nachiketh-murthy/)
+```
+docker build -t llmops:v1 .
+docker build -t manifoldailearning/llmops-huggingface:latest . 
+docker push manifoldailearning/llmops-huggingface:latest
+docker run -d -it --name modelv1 -p 8000:8000 manifoldailearning/llmops-huggingface:latest bash
 
-Reach us at : support@manifoldailearning.in
+docker run -it -p 8000:8000 manifoldailearning/llmops-huggingface:latest
+```
 
-Happy Learning
+## Postman Test
+
+```
+curl --location 'http://localhost:8000/generate' \
+--header 'Content-Type: application/json' \
+--data '{
+  "text": "WElcome to my class on mlops, I am so"
+}'
+```
+
+`http://localhost:8000/generate`
+
+```json
+{
+    "text": "WElcome to my class on mlops, I am so"
+}
+```
