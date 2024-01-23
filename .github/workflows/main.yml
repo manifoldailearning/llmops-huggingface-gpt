@@ -50,24 +50,24 @@ jobs:
           push: true
           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.REPO }}:${{ github.sha }}
           file: ./Dockerfile
-    deploy:
-      runs-on: ubuntu-latest
-      needs: build
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
 
-      steps:
-        - name: Azure Login
-          uses: azure/login@v1
-          with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        - name: Lowercase the repo name and username
-          run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+      - name: Lowercase the repo name and username
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
-        - name: Deploy to containerapp
-          uses: azure/CLI@v1
-          with:
-            inlineScript: |
-              az config set extension.use_dynamic_install=yes_without_prompt
-              az containerapp registry set -n ${{ env.AZURE_CONTAINER_APP_NAME }} -g ${{ env.AZURE_GROUP_NAME }} --server ${{ env.AZURE_CONTAINER_REGISTRY }} --username  ${{ secrets.AZ_USERNAME }} --password ${{ secrets.AZ_PASSWORD }}
-              az containerapp update -n ${{ env.AZURE_CONTAINER_APP_NAME }} -g ${{ env.AZURE_GROUP_NAME }} --cpu 2 --memory 4Gi
-              az containerapp update -n ${{ env.AZURE_CONTAINER_APP_NAME }} -g ${{ env.AZURE_GROUP_NAME }} --image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.REPO }}:${{ github.sha }}
+      - name: Deploy to containerapp
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+            az containerapp registry set -n ${{ env.AZURE_CONTAINER_APP_NAME }} -g ${{ env.AZURE_GROUP_NAME }} --server ${{ env.AZURE_CONTAINER_REGISTRY }} --username  ${{ secrets.AZ_USERNAME }} --password ${{ secrets.AZ_PASSWORD }}
+            az containerapp update -n ${{ env.AZURE_CONTAINER_APP_NAME }} -g ${{ env.AZURE_GROUP_NAME }} --cpu 2 --memory 4Gi
+            az containerapp update -n ${{ env.AZURE_CONTAINER_APP_NAME }} -g ${{ env.AZURE_GROUP_NAME }} --image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.REPO }}:${{ github.sha }}
