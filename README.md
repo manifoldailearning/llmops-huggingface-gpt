@@ -26,3 +26,8 @@ curl --location 'http://localhost:8000/generate' \
     "text": "WElcome to my class on mlops, I am so"
 }
 ```
+
+
+# Azure Creds
+
+az ad sp create-for-rbac --name my-app-credentials --role contributor --scopes /subscriptions/c74546f6-aa22-40f7-a495-7512b6d82cd2/resourceGroups/llm-container --json-auth --output json
