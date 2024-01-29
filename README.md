@@ -30,4 +30,9 @@ curl --location 'http://localhost:8000/generate' \
 
 # Azure Creds
 
-az ad sp create-for-rbac --name my-app-credentials --role contributor --scopes /subscriptions/c74546f6-aa22-40f7-a495-7512b6d82cd2/resourceGroups/llm-container --json-auth --output json
+```az ad sp create-for-rbac --name my-app-credentials --role contributor --scopes /subscriptions/c74546f6-aa22-40f7-a495-7512b6d82cd2/resourceGroups/llm-container --json-auth --output json```
+
+
+```
+az containerapp logs  show  --name llmcontainer555 --resource-group llm-container  --follow
+```
