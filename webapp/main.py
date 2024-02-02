@@ -1,3 +1,4 @@
+#!/bin/python3
 from transformers import pipeline
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
@@ -27,4 +28,4 @@ def predict(body: Body):
     return results[0]
 
 if __name__== "__main__":
-    uvicorn.run(app, host="0.0.0.0",port=8000)
+    uvicorn.run(app, host="0.0.0.0",port=80)
