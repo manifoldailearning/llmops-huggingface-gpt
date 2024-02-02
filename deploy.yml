@@ -17,6 +17,7 @@ spec:
       containers:
       - name: myapp-cont
         image: us-central1-docker.pkg.dev/civic-rhythm-404204/mydemo/llmdemo:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 
