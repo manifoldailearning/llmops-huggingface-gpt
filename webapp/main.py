@@ -19,7 +19,7 @@ class Body(BaseModel):
 
 @app.get('/')
 def index():
-    return HTMLResponse("<h1>Welcome to LLMOps Course with a GPT2 model V1</h1>")
+    return HTMLResponse("<h1>Welcome to LLMOps Course with a GPT2 model V2</h1>")
 
 
 @app.post('/generate')
